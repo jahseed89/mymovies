@@ -57,9 +57,12 @@ const MovieDetails = () => {
               />
             </div>
             <div>
-              <p>{movie.release_date}</p>
+              <div>
+                <p>{movie.release_date}</p>
+                <p>{movie.runtime}</p>
+              </div>
               <p>{movie.overview}</p>
-              <p>{movie.runtime}</p>
+              
             </div>
           </div>
         </div>
