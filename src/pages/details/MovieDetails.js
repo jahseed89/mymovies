@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Loader } from "../../component/index";
 import { calender, des, home, logo, tvshow } from "../../assets/index";
+import {BiArrowBack} from 'react-icons/bi'
 import "./movieDetails.scss";
 
 const MovieDetails = () => {
@@ -28,11 +29,12 @@ const MovieDetails = () => {
       });
   }, [movieId, apiKey]);
 
-  const navigator = useNavigate()
+  const navigator = useNavigate();
   const toHomePage = () => {
-    navigator('/')
-  }
+    navigator("/");
+  };
 
+ 
   return (
     <div className="details">
       {isLoading ? (
@@ -59,6 +61,10 @@ const MovieDetails = () => {
             </p>
           </div>
           <div className="main">
+             <p className="home-link">
+                <BiArrowBack />
+                <Link to='/'>Back</Link>
+            </p>
             <h1>{movie.title}</h1>
             <div className="img-container">
               <img
@@ -76,7 +82,6 @@ const MovieDetails = () => {
                 <p>{movie.overview}</p>
                 <img src={des} alt="logo" />
               </div>
-              
             </div>
           </div>
         </div>

@@ -1,15 +1,41 @@
 .details {
     width: 80%;
     margin: 0 auto;
+    font-family: 'Courier New', Courier, monospace;
+
+    @media (max-width: 900px) {
+        width: 100%;
+    }
 
     .details-container {
         display: flex;
         justify-content: space-around;
+
+        
+
+        .menu-wrapper {
+            padding: .2rem;
+            width: fit-content;
+            display: flex;
+            gap: 2rem;
+            z-index: 1000;
+            font-size: 26px;
+            cursor: pointer;
+            position: fixed;
+            top: -.6rem;
+            width: 100%;
+            background-color: #fff;
+        }
+
         .nav {
             width: 20%;
             border: 1px solid #428bca;
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
+
+            @media (max-width: 900px) {
+                display: none;
+            }
 
             p {
                 display: flex;
@@ -28,6 +54,25 @@
         .main {
             width: 70%;
 
+            .home-link {
+                display: none;
+                text-align: end;
+                color:  #428bca;
+                font-size: 20px;
+
+                a {
+                    color: #428bca;
+                    font-size: 20px;
+                    text-decoration: none;
+                }
+    
+                @media (max-width: 900px) {
+                    display: flex;
+                    align-items: center;
+                    gap: .5rem;
+                }
+            }
+
             .img-container {
                 width: 100%;
 
@@ -45,8 +90,10 @@
         .overview {
             display: flex;
             gap: 1rem;
+
+            @media (max-width: 900px) {
+                flex-direction: column !important;
+            }
         }
     }
-
-    
 }
