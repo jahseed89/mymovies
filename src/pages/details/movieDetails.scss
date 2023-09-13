@@ -1,0 +1,22 @@
+.details {
+    width: 80%;
+    margin: 0 auto;
+
+    .details-container {
+        display: flex;
+
+        .nav {
+            width: 30%;
+            border: 1px solid #428bca;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .main {
+            width: 70%;
+            border: 1px solid green;
+        }
+    }
+
+    
+}

@@ -1,0 +1,36 @@
+.home {
+    width: 70%;
+    margin: 0 auto;
+    font-family: 'Courier New', Courier, monospace;
+
+    .top-bg {
+        background-image: url('../../assets/johnwick.jpeg');
+        height: 300px;
+
+        .input-fild {
+            width: 30%;
+            margin: 0 auto;
+            padding-top: 1rem;
+
+            input {
+                width: 90%;
+                padding: .5rem 1rem;
+                border-radius: 10px;
+            }
+        }
+    }
+    .title {
+        margin-top: 3rem;
+        color:  #428bca;
+    }
+    .movie-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .footer {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+

@@ -1,0 +1,41 @@
+.movie-card {
+    margin: 1rem 0;
+    background-color: #e3e9f3de;
+    border-radius: 10px;
+    .des-container {
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            padding: 0 .5rem;
+    
+            span {
+                color: #9CA3AF;
+                font-size: 14px;
+            }
+            h3 {
+                margin: -.0.3rem 0;
+                font-size: 14px;
+            }
+        }
+        .button-holder {
+            width: 30%;
+            text-align: end;
+            padding-right: .2rem;
+
+            button {
+                padding: .2rem .5rem;
+                background-color: #428bca;
+                color: #fff;
+                border: 1px solid #428bca;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+        }
+    }
+
+}
