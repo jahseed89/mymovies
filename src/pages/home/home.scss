@@ -12,10 +12,15 @@
             margin: 0 auto;
             padding-top: 1rem;
 
+            @media (max-width: 900px) {
+                width: 90%;
+            }
+
             input {
                 width: 90%;
                 padding: .5rem 1rem;
                 border-radius: 10px;
+
             }
         }
     }
