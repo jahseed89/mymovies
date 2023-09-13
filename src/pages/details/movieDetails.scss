@@ -4,17 +4,47 @@
 
     .details-container {
         display: flex;
-
+        justify-content: space-around;
         .nav {
-            width: 30%;
+            width: 20%;
             border: 1px solid #428bca;
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
+
+            p {
+                display: flex;
+                align-items: center;
+                gap: 2.5rem;
+                margin: 2.5rem 0;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                padding: .5rem 0;
+
+                &:nth-child(2) {
+                    cursor: pointer;
+                }
+            }
         }
 
         .main {
             width: 70%;
-            border: 1px solid green;
+
+            .img-container {
+                width: 100%;
+
+                img {
+                    width: 100%;
+                    border-radius: 20px;
+                }
+            }
+        }
+
+        .date-des {
+            display: flex;
+            gap: 1rem;
+        }
+        .overview {
+            display: flex;
+            gap: 1rem;
         }
     }
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Loader } from "../../component/index";
-import { home, logo, movies } from "../../assets/index";
+import { calender, des, home, logo, tvshow } from "../../assets/index";
 import "./movieDetails.scss";
 
 const MovieDetails = () => {
@@ -28,6 +28,11 @@ const MovieDetails = () => {
       });
   }, [movieId, apiKey]);
 
+  const navigator = useNavigate()
+  const toHomePage = () => {
+    navigator('/')
+  }
+
   return (
     <div className="details">
       {isLoading ? (
@@ -40,16 +45,22 @@ const MovieDetails = () => {
             <p>
               <img src={logo} alt="logo" />
             </p>
-            <p>
+            <p onClick={toHomePage}>
               <img src={home} alt="logo" />
+              <span>Home</span>
             </p>
             <p>
-              <img src={movies} alt="logo" />
+              <img src={tvshow} alt="logo" />
+              <span>TV Series</span>
+            </p>
+            <p>
+              <img src={calender} alt="logo" />
+              <span>Upcoming</span>
             </p>
           </div>
           <div className="main">
             <h1>{movie.title}</h1>
-            <div>
+            <div className="img-container">
               <img
                 src={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`}
                 alt={`${movie.title} poster`}
@@ -57,11 +68,14 @@ const MovieDetails = () => {
               />
             </div>
             <div>
-              <div>
+              <div className="date-des">
                 <p>{movie.release_date}</p>
-                <p>{movie.runtime}</p>
+                <p>{movie.runtime}m</p>
               </div>
-              <p>{movie.overview}</p>
+              <div className="overview">
+                <p>{movie.overview}</p>
+                <img src={des} alt="logo" />
+              </div>
               
             </div>
           </div>
