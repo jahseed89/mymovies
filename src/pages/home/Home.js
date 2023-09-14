@@ -11,6 +11,7 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const apiKey = process.env.REACT_APP_TMDB_KEY;
   const baseUrl = "https://api.themoviedb.org/3/discover/movie";
+  const allMovieUrl = 'https://api.themoviedb.org/3/search/movie'
 
   useEffect(() => {
     axios
@@ -32,12 +33,11 @@ const Home = () => {
   }, [apiKey]);
 
   const handleSearchInputChange = (event) => {
-    const searchTerm = event.target.value;
-    setSearchTerm(searchTerm);
+    setSearchTerm(event.target.value);
 
     if (searchTerm) {
       axios
-        .get(`${baseUrl}?api_key=${apiKey}&query=${searchTerm}`)
+        .get(`${allMovieUrl}?api_key=${apiKey}&query=${searchTerm}`)
         .then((response) => {
           const searchResults = response.data.results;
 
