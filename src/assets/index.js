@@ -7,6 +7,7 @@ import logo from './Logo.png'
 import movies from './movies.png'
 import tvshow from './tvshow.png'
 import johnwick from './johnwick.jpeg'
+import header from './header.svg'
 
 
 export {
@@ -18,5 +19,6 @@ export {
     logo,
     movies,
     tvshow,
-    johnwick
+    johnwick,
+    header
 }
