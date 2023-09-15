@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUseStyles } from "react-jss";
+import { Toaster, toast } from "react-hot-toast";
 
 const useStyles = createUseStyles({
 
@@ -54,6 +55,10 @@ const useStyles = createUseStyles({
     borderRadius: "5px",
     fontSize: "12px",
   },
+  'button:disabled': {
+    backgroundColor: "black",
+    color: "white",
+  },
 })
 
 const MovieCard = ({
@@ -68,6 +73,7 @@ const MovieCard = ({
     const navigate = useNavigate()
     
     const [savedMovie, setSavedMovie] = useState([])
+    const [disableBtn, setDisableBtn] = useState(false)
 
     const handleDetails = () => {
         navigate(`details/${movieId}`)
@@ -76,12 +82,25 @@ const MovieCard = ({
     const handleSaveMovie = () => {
       if(savedMovie.some(movie => movie.movieId === movieId)) {
         setSavedMovie([...savedMovie, {savedMovie, title}])
+        setDisableBtn(true)
+        successMsg()
       }
-      
+    }
+
+    const successMsg = ()=>{
+      toast('Movie Saved Successfully', {
+        position: "top-center",
+        duration: 5000,
+        style: {
+          background: '#00000',
+          color: '#fffff'
+        }
+      })
     }
    
   return (
     <div data-testid="movie-card" className={classes.movieCard}>
+      <Toaster />
       <img
         src={`https://image.tmdb.org/t/p/w300/${poster}`}
         alt={`${posterTitle} poster`}
@@ -96,7 +115,7 @@ const MovieCard = ({
           <span data-testid="movie-release-date" className={classes.detailsSpan}>{releaseDate}</span>
         </div>
         <div className={classes.buttonHolder}>
-          <button onClick={handleSaveMovie} className={classes.button}>Saved Movie</button>
+          <button onClick={handleSaveMovie} className={classes.button} disabled={disableBtn}>{disableBtn ? "Movie Saved" : "Saved Movie"}</button>
         </div>
       </div>
     </div>
