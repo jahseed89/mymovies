@@ -166,18 +166,19 @@ const MovieDetails = () => {
                 <BiArrowBack />
                 <Link to='/' className={classes.link}>Back</Link>
             </p>
-            <h1>{movie.title}</h1>
+            <h1 data-testid="movie-title">{movie.title}</h1>
             <div className={classes.imgContainer}>
               <img
                 src={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`}
                 alt={`${movie.title} poster`}
                 className={classes.img}
+                data-testid="movie-poster"
               />
             </div>
             <div>
               <div className={classes.dateDes}>
-                <p>{movie.release_date}</p>
-                <p>{convertMinutesToHours(movie.runtime)}</p>
+                <p data-testid="movie-release-date">{movie.release_date}</p>
+                <p data-testid="movie-runtime">{convertMinutesToHours(movie.runtime)}</p>
               </div>
               <div className={classes.overView}>
                 <p>{movie.overview}</p>

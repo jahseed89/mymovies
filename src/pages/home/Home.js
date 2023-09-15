@@ -13,7 +13,7 @@ const Home = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const apiKey = process.env.REACT_APP_TMDB_KEY;
-  const baseUrl = "https://api.themoviedb.org/3/discover/movie";
+  const baseUrl = "https://api.themoviedb.org/3/movie/top_rated";
   const allMovieUrl = "https://api.themoviedb.org/3/search/movie";
 
   useEffect(() => {
@@ -22,7 +22,6 @@ const Home = () => {
       .then((response) => {
         const sortedMovies = response.data.results
           .slice(0, 10)
-          .sort((a, b) => b.popularity - a.popularity);
 
         setTopMovies(sortedMovies);
         setTimeout(() => {
@@ -93,13 +92,13 @@ const Home = () => {
             {topMovies.map((movie) => (
               <div key={movie.id}>
                 <MovieCard
+                  data-testid="movie-card"
+                  movieId={movie.id}
                   poster={movie.backdrop_path}
                   posterTitle={movie.backdrop_path}
                   popularity={movie.popularity}
                   title={movie.title}
                   releaseDate={movie.release_date}
-                  dataTestId={`movie-card-${movie.id}`}
-                  movieId={movie.id}
                 />
               </div>
             ))}
