@@ -2,16 +2,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Loader, MovieCard } from "../../component/index";
 import { footer } from "../../assets/index";
+import { useNavigate } from "react-router-dom";
 import "./home.scss";
 
 const Home = () => {
   const [topMovies, setTopMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchLoading, setSearchLoading] = useState(false);
+
   const [searchTerm, setSearchTerm] = useState("");
   const apiKey = process.env.REACT_APP_TMDB_KEY;
   const baseUrl = "https://api.themoviedb.org/3/discover/movie";
-  const allMovieUrl = 'https://api.themoviedb.org/3/search/movie'
+  const allMovieUrl = "https://api.themoviedb.org/3/search/movie";
 
   useEffect(() => {
     axios
@@ -23,8 +26,8 @@ const Home = () => {
 
         setTopMovies(sortedMovies);
         setTimeout(() => {
-            setIsLoading(false)
-        }, 5000)
+          setIsLoading(false);
+        }, 5000);
       })
       .catch((error) => {
         console.error("Error fetching top movies:", error);
@@ -32,28 +35,40 @@ const Home = () => {
       });
   }, [apiKey]);
 
-  const handleSearchInputChange = (event) => {
+  const handleSearch = (event) => {
     setSearchTerm(event.target.value);
 
     if (searchTerm) {
+        setSearchLoading(true)
       axios
         .get(`${allMovieUrl}?api_key=${apiKey}&query=${searchTerm}`)
         .then((response) => {
           const searchResults = response.data.results;
 
-        const filteredResults = searchResults.filter((movie) =>
+          const filteredResults = searchResults.filter((movie) =>
             movie.title.toLowerCase().includes(searchTerm.toLowerCase())
           );
+
+          setTimeout(() => {
+            setSearchLoading(false)
+          }, 3000)
 
           setSearchedMovies(filteredResults);
         })
         .catch((error) => {
           console.error("Error fetching search results:", error);
+          setSearchLoading(false)
         });
     } else {
       setSearchedMovies([]);
+      setSearchLoading(false)
     }
   };
+
+  const navigator = useNavigate()
+  const handleMovieDetails = (movieId) => {
+    navigator(`details/${movieId}`)
+  }
 
   return (
     <div className="home">
@@ -69,40 +84,46 @@ const Home = () => {
                 type="text"
                 placeholder="Search by movie title"
                 value={searchTerm}
-                onChange={handleSearchInputChange}
+                onChange={handleSearch}
               />
             </div>
           </div>
           <h1 className="title">Top 10 Movies</h1>
           <div className="movie-wrapper">
-            {searchTerm
-              ? searchedMovies.map((movie) => (
-                  <div key={movie.id}>
-                    <MovieCard
-                      poster={movie.backdrop_path}
-                      posterTitle={movie.backdrop_path}
-                      popularity={movie.popularity}
-                      title={movie.title}
-                      releaseDate={movie.release_date}
-                      dataTestId={`movie-card-${movie.id}`}
-                      movieId={movie.id}
+            {topMovies.map((movie) => (
+              <div key={movie.id}>
+                <MovieCard
+                  poster={movie.backdrop_path}
+                  posterTitle={movie.backdrop_path}
+                  popularity={movie.popularity}
+                  title={movie.title}
+                  releaseDate={movie.release_date}
+                  dataTestId={`movie-card-${movie.id}`}
+                  movieId={movie.id}
+                />
+              </div>
+            ))}
+          </div>
+          { searchLoading ? (
+            <h1 className="loading">Loading...</h1>
+          ) : searchTerm && (
+            <div className="search-movies-container">
+              <div>
+                {searchedMovies.map((movie) => (
+                  <div key={movie.id} className="search-des" onClick={() => handleMovieDetails(movie.id)}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w200/${movie.backdrop_path}`}
+                      alt={`${movie.title.slice(0, 10)} poster`}
                     />
-                  </div>
-                ))
-              : topMovies.map((movie) => (
-                  <div key={movie.id}>
-                    <MovieCard
-                      poster={movie.backdrop_path}
-                      posterTitle={movie.backdrop_path}
-                      popularity={movie.popularity}
-                      title={movie.title}
-                      releaseDate={movie.release_date}
-                      dataTestId={`movie-card-${movie.id}`}
-                      movieId={movie.id}
-                    />
+                    <div className="titleAndDate">
+                      <h3>{movie.title.slice(0, 25)}</h3>
+                      <p>{movie.release_date}</p>
+                    </div>
                   </div>
                 ))}
-          </div>
+              </div>
+            </div>
+          )}
           <div className="footer">
             <div className="des-section">
               <img src={footer} alt="footer" />

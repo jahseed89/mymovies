@@ -34,7 +34,7 @@ const MovieDetails = () => {
     navigator("/");
   };
 
-  const convertMinutesToHoursAndMinutes = (minutes) => {
+  const convertMinutesToHours = (minutes) => {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
     return `${hours}h ${remainingMinutes}m`;
@@ -81,7 +81,7 @@ const MovieDetails = () => {
             <div>
               <div className="date-des">
                 <p>{movie.release_date}</p>
-                <p>{convertMinutesToHoursAndMinutes(movie.runtime)}</p>
+                <p>{convertMinutesToHours(movie.runtime)}</p>
               </div>
               <div className="overview">
                 <p>{movie.overview}</p>

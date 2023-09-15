@@ -8,9 +8,10 @@
         height: 300px;
 
         .input-fild {
-            width: 30%;
+            width: 40%;
             margin: 0 auto;
             padding-top: 1rem;
+            position: relative;
 
             @media (max-width: 900px) {
                 width: 90%;
@@ -33,6 +34,53 @@
         flex-wrap: wrap;
         justify-content: space-between;
     }
+
+    .loading {
+        position: absolute;
+        top: 3.5rem;
+        left: 45%;
+        font-size: 20px;
+        color: #fff;
+    }
+
+    .search-movies-container {
+        background-color: #fff;
+        width: 40%;
+        height: 300px;
+        position: absolute;
+        top: 5rem;
+        left: 30%;
+        overflow-y: scroll;
+        border-radius: 10px;
+
+        @media (max-width: 900px) {
+            width: 80%;
+            left: 15%;
+        }
+
+        .search-des {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .5rem;
+
+            &:hover {
+                background-color: #e3e9f3de;
+                cursor: pointer;
+            }
+
+            img {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+            }
+            .titleAndDate {
+                width: 70%;
+                font-size: 16px;
+            }
+        }
+    }
+
     .footer {
         text-align: center;
         margin-top: 2rem;
