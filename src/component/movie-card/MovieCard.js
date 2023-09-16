@@ -83,9 +83,9 @@ const MovieCard = ({
   const [isButtonClicked, setIsButtonClicked] = useState(false);
     const classes = useStyles()
     const navigate = useNavigate()
-    
+
     const handleDetails = () => {
-        navigate(`details/${movieId}`)
+        navigate(`movies/${movieId}`)
     }
 
     const handleSaveButtonClick = () => {
