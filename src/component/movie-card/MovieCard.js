@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUseStyles } from "react-jss";
 
@@ -60,6 +60,15 @@ console.log(theme, 'theme')
     backgroundColor: "#000000",
     color: "white",
   },
+  buttonSaved: {
+    padding: ".2rem .5rem",
+    backgroundColor: "black",
+    color: "white",
+    border: "1px solid black",
+    cursor: "pointer",
+    borderRadius: "5px",
+    fontSize: "12px",
+  },
 }})
 
 const MovieCard = ({
@@ -71,13 +80,22 @@ const MovieCard = ({
   movieId,
   handleSaveMovie
 }) => {
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
     const classes = useStyles()
     const navigate = useNavigate()
+
     
 
     const handleDetails = () => {
         navigate(`details/${movieId}`)
     }
+
+    const handleSaveButtonClick = () => {
+      if (!isButtonClicked) {
+        handleSaveMovie(movieId);
+        setIsButtonClicked(true);
+      }
+    };
    
   return (
     <div data-testid="movie-card" className={classes.movieCard}>
@@ -95,7 +113,15 @@ const MovieCard = ({
           <span data-testid="movie-release-date" className={classes.detailsSpan}>{releaseDate}</span>
         </div>
         <div className={classes.buttonHolder}>
-          <button onClick={() => handleSaveMovie(movieId)} className={classes.button}>Save Movie</button>
+          {/* <button onClick={() => handleSaveMovie(movieId)} className={classes.button}>Save Movie</button> */}
+          <button
+          onClick={handleSaveButtonClick}
+          className={isButtonClicked ? classes.buttonSaved : classes.button}
+          disabled={isButtonClicked}
+        >
+          {isButtonClicked ? "Movie Saved" : "Save Movie"}
+        </button>
+
         </div>
       </div>
     </div>
