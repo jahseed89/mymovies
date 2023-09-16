@@ -68,7 +68,7 @@ const Home = () => {
 
   const navigator = useNavigate();
   const handleMovieDetails = (movieId) => {
-    navigator(`details/${movieId}`);
+    navigator(`movies/${movieId}`);
   };
 
 const handleSaveClick = (movieId) => {
