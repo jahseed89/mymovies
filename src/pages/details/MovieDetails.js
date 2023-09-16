@@ -95,7 +95,7 @@ const useStyles = createUseStyles((theme) => ({
 
   savedMovieBtn: {
     padding: "0 .5rem",
-    backgroundColor: "black", // Set the background color to black for the saved state
+    backgroundColor: "black",
     color: "white",
     border: "1px solid black",
     cursor: "pointer",
@@ -122,7 +122,7 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 const MovieDetails = () => {
-  const { movieId } = useParams();
+  const { movie_id } = useParams();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const apiKey = process.env.REACT_APP_TMDB_KEY;
@@ -133,7 +133,7 @@ const MovieDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/${movieId}?api_key=${apiKey}&language=en-US`)
+      .get(`${baseUrl}/${movie_id}?api_key=${apiKey}&language=en-US`)
       .then((response) => {
         setMovie(response.data);
         console.log(response.data);
@@ -145,7 +145,7 @@ const MovieDetails = () => {
         console.error("Error fetching movie details:", error);
         setIsLoading(false);
       });
-  }, [movieId, apiKey]);
+  }, [movie_id, apiKey]);
 
   const navigator = useNavigate();
   const toHomePage = () => {

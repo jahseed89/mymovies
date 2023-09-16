@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Loader, MovieCard } from "../../component/index";
 import { footer } from "../../assets/index";
 import { useNavigate } from "react-router-dom";
-import "./home.scss";
 import { Toaster, toast } from "react-hot-toast";
+import "./home.scss";
 
 const Home = () => {
   const [topMovies, setTopMovies] = useState([]);
@@ -80,7 +80,6 @@ const handleSaveClick = (movieId) => {
       }
     }
   };
-  
 
   const successMsg = () => {
     toast("Movie Saved Successfully", {
@@ -173,3 +172,4 @@ const handleSaveClick = (movieId) => {
 };
 
 export default Home;
+

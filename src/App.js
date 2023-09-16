@@ -20,7 +20,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="movies/:movieId" element={<MovieDetails />} />
+        <Route path="movies/:movie_id" element={<MovieDetails />} />
       </Routes>
     </ThemeProvider>
   );

@@ -25,6 +25,10 @@
 
             }
         }
+        .invalid-movie {
+            text-align: center;
+            color: red;
+        }
     }
     .title {
         margin-top: 3rem;
@@ -84,16 +88,6 @@
                 width: 70%;
                 font-size: 16px;
             }
-            // .searchMovie-btn {
-            //     padding: .2rem .5rem;
-            //     background-color: #428bca;
-            //     color: #fff;
-            //     border: 1px solid #428bca;
-            //     cursor: pointer;
-            //     border-radius: 5px;
-            //     font: 12px;
-            //     z-index: 100;
-            // }
         }
     }
 
