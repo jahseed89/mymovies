@@ -71,7 +71,7 @@ const Home = () => {
     navigator(`movies/${movie_id}`);
   };
 
-const handleSaveClick = (movie_id) => {
+  const handleSaveClick = (movie_id) => {
     if (!savedMovie.some((movie) => movie.movie_id === movie_id)) {
       const movieToSave = topMovies.find((movie) => movie.id === movie_id);
       if (movieToSave) {
@@ -172,4 +172,3 @@ const handleSaveClick = (movie_id) => {
 };
 
 export default Home;
-

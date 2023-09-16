@@ -7,12 +7,6 @@ const theme = {
   colors: {
     blue: "#428bca",
   },
-  borderRadius: "5px",
-  desContainer: {
-    width: "300px",
-    display: 'flex',
-    justifyContent: 'space-between',
-  }
 };
 const App = () => {
   return (
