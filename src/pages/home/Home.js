@@ -67,13 +67,13 @@ const Home = () => {
   };
 
   const navigator = useNavigate();
-  const handleMovieDetails = (movieId) => {
-    navigator(`movies/${movieId}`);
+  const handleMovieDetails = (movie_id) => {
+    navigator(`movies/${movie_id}`);
   };
 
-const handleSaveClick = (movieId) => {
-    if (!savedMovie.some((movie) => movie.movieId === movieId)) {
-      const movieToSave = topMovies.find((movie) => movie.id === movieId);
+const handleSaveClick = (movie_id) => {
+    if (!savedMovie.some((movie) => movie.movie_id === movie_id)) {
+      const movieToSave = topMovies.find((movie) => movie.id === movie_id);
       if (movieToSave) {
         setSavedMovie([...savedMovie, movieToSave]);
         successMsg();
@@ -117,7 +117,7 @@ const handleSaveClick = (movieId) => {
               <div key={movie.id}>
                 <MovieCard
                   data-testid="movie-card"
-                  movieId={movie.id}
+                  movie_id={movie.id}
                   poster={movie.backdrop_path}
                   posterTitle={movie.backdrop_path}
                   popularity={movie.popularity}

@@ -77,7 +77,7 @@ const MovieCard = ({
   popularity,
   title,
   releaseDate,
-  movieId,
+  movie_id,
   handleSaveMovie
 }) => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -85,12 +85,12 @@ const MovieCard = ({
     const navigate = useNavigate()
 
     const handleDetails = () => {
-        navigate(`movies/${movieId}`)
+        navigate(`movies/${movie_id}`)
     }
 
     const handleSaveButtonClick = () => {
       if (!isButtonClicked) {
-        handleSaveMovie(movieId);
+        handleSaveMovie(movie_id);
         setIsButtonClicked(true);
       }
     };
