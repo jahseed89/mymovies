@@ -8,7 +8,6 @@ const theme = {
     blue: "#428bca",
   },
   borderRadius: "5px",
-  // padding
   desContainer: {
     width: "300px",
     display: 'flex',

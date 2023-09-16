@@ -83,9 +83,7 @@ const MovieCard = ({
   const [isButtonClicked, setIsButtonClicked] = useState(false);
     const classes = useStyles()
     const navigate = useNavigate()
-
     
-
     const handleDetails = () => {
         navigate(`details/${movieId}`)
     }
@@ -113,7 +111,6 @@ const MovieCard = ({
           <span data-testid="movie-release-date" className={classes.detailsSpan}>{releaseDate}</span>
         </div>
         <div className={classes.buttonHolder}>
-          {/* <button onClick={() => handleSaveMovie(movieId)} className={classes.button}>Save Movie</button> */}
           <button
           onClick={handleSaveButtonClick}
           className={isButtonClicked ? classes.buttonSaved : classes.button}
