@@ -12,7 +12,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const apiKey = process.env.REACT_APP_TMDB_KEY;
+  const API_KEY = process.env.REACT_APP_TMDB_KEY;
 
   const [savedMovie, setSavedMovie] = useState([]);
 
@@ -21,7 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}?api_key=${apiKey}`)
+      .get(`${baseUrl}?api_key=${API_KEY}`)
       .then((response) => {
         const sortedMovies = response.data.results.slice(0, 10);
 
@@ -34,7 +34,7 @@ const Home = () => {
         console.error("Error fetching top movies:", error);
         setIsLoading(false);
       });
-  }, [apiKey]);
+  }, [API_KEY]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -42,7 +42,7 @@ const Home = () => {
     if (searchTerm) {
       setSearchLoading(true);
       axios
-        .get(`${allMovieUrl}?api_key=${apiKey}&query=${searchTerm}`)
+        .get(`${allMovieUrl}?api_key=${API_KEY}&query=${searchTerm}`)
         .then((response) => {
           const searchResults = response.data.results;
 
