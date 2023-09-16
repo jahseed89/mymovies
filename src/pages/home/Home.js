@@ -4,15 +4,18 @@ import { Loader, MovieCard } from "../../component/index";
 import { footer } from "../../assets/index";
 import { useNavigate } from "react-router-dom";
 import "./home.scss";
+import { Toaster, toast } from "react-hot-toast";
 
 const Home = () => {
   const [topMovies, setTopMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
-
   const [searchTerm, setSearchTerm] = useState("");
   const apiKey = process.env.REACT_APP_TMDB_KEY;
+
+  const [savedMovie, setSavedMovie] = useState([]);
+
   const baseUrl = "https://api.themoviedb.org/3/movie/top_rated";
   const allMovieUrl = "https://api.themoviedb.org/3/search/movie";
 
@@ -20,8 +23,7 @@ const Home = () => {
     axios
       .get(`${baseUrl}?api_key=${apiKey}`)
       .then((response) => {
-        const sortedMovies = response.data.results
-          .slice(0, 10)
+        const sortedMovies = response.data.results.slice(0, 10);
 
         setTopMovies(sortedMovies);
         setTimeout(() => {
@@ -38,7 +40,7 @@ const Home = () => {
     setSearchTerm(event.target.value);
 
     if (searchTerm) {
-        setSearchLoading(true)
+      setSearchLoading(true);
       axios
         .get(`${allMovieUrl}?api_key=${apiKey}&query=${searchTerm}`)
         .then((response) => {
@@ -49,28 +51,51 @@ const Home = () => {
           );
 
           setTimeout(() => {
-            setSearchLoading(false)
-          }, 3000)
+            setSearchLoading(false);
+          }, 3000);
 
           setSearchedMovies(filteredResults);
         })
         .catch((error) => {
           console.error("Error fetching search results:", error);
-          setSearchLoading(false)
+          setSearchLoading(false);
         });
     } else {
       setSearchedMovies([]);
-      setSearchLoading(false)
+      setSearchLoading(false);
     }
   };
 
-  const navigator = useNavigate()
+  const navigator = useNavigate();
   const handleMovieDetails = (movieId) => {
-    navigator(`details/${movieId}`)
-  }
+    navigator(`details/${movieId}`);
+  };
+
+const handleSaveClick = (movieId) => {
+    if (!savedMovie.some((movie) => movie.movieId === movieId)) {
+      const movieToSave = topMovies.find((movie) => movie.id === movieId);
+      if (movieToSave) {
+        setSavedMovie([...savedMovie, movieToSave]);
+        successMsg();
+      }
+    }
+  };
+  
+
+  const successMsg = () => {
+    toast("Movie Saved Successfully", {
+      position: "top-center",
+      duration: 5000,
+      style: {
+        background: "#333",
+        color: "#ffffff",
+      },
+    });
+  };
 
   return (
     <div className="home">
+      <Toaster />
       {isLoading ? (
         <div>
           <Loader />
@@ -99,29 +124,36 @@ const Home = () => {
                   popularity={movie.popularity}
                   title={movie.title}
                   releaseDate={movie.release_date}
+                  handleSaveMovie={() => handleSaveClick(movie.id)}
                 />
               </div>
             ))}
           </div>
-          { searchLoading ? (
+          {searchLoading ? (
             <h1 className="loading">Loading...</h1>
-          ) : searchTerm && (
-            <div className="search-movies-container">
-              <div>
-                {searchedMovies.map((movie) => (
-                  <div key={movie.id} className="search-des" onClick={() => handleMovieDetails(movie.id)}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w200/${movie.backdrop_path}`}
-                      alt={`${movie.title.slice(0, 10)} poster`}
-                    />
-                    <div className="titleAndDate">
-                      <h3>{movie.title.slice(0, 25)}</h3>
-                      <p>{movie.release_date}</p>
+          ) : (
+            searchTerm && (
+              <div className="search-movies-container">
+                <div>
+                  {searchedMovies.map((movie) => (
+                    <div
+                      key={movie.id}
+                      className="search-des"
+                      onClick={() => handleMovieDetails(movie.id)}
+                    >
+                      <img
+                        src={`https://image.tmdb.org/t/p/w200/${movie.backdrop_path}`}
+                        alt={`${movie.title.slice(0, 10)} poster`}
+                      />
+                      <div className="titleAndDate">
+                        <h3>{movie.title.slice(0, 25)}</h3>
+                        <p>{movie.release_date}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            )
           )}
           <div className="footer">
             <div className="des-section">

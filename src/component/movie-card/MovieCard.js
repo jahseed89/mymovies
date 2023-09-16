@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { createUseStyles } from "react-jss";
-import { Toaster, toast } from "react-hot-toast";
 
-const useStyles = createUseStyles({
-
+const useStyles = createUseStyles((theme) => {
+console.log(theme, 'theme')
+  return {
   movieCard: {
+    width: "100%",
     margin: "1rem 0",
-    color: "#e3e9f3de",
+    color: theme.colors.blue,
     borderRadius: "10px",
     boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
   },
 
   movieCardImg: {
-    cursor: "pointer"
+    cursor: "pointer",
   },
 
   desContainer: {
@@ -29,7 +30,7 @@ const useStyles = createUseStyles({
     padding: '0 .5rem',
   },
   detailsSpan: {
-    color: "#9CA3AF",
+    color: theme.colors.blue,
     fontSize: '14px'
   },
   detalsH3: {
@@ -48,18 +49,18 @@ const useStyles = createUseStyles({
 
   button: {
     padding: ".2rem .5rem",
-    backgroundColor: "#428bca",
+    backgroundColor: theme.colors.blue,
     color: "#fff",
-    border: "1px solid #428bca",
+    border: `1px solid ${theme.colors.blue}`,
     cursor: "pointer",
     borderRadius: "5px",
     fontSize: "12px",
   },
   'button:disabled': {
-    backgroundColor: "black",
+    backgroundColor: "#000000",
     color: "white",
   },
-})
+}})
 
 const MovieCard = ({
   poster,
@@ -67,40 +68,19 @@ const MovieCard = ({
   popularity,
   title,
   releaseDate,
-  movieId
+  movieId,
+  handleSaveMovie
 }) => {
     const classes = useStyles()
     const navigate = useNavigate()
     
-    const [savedMovie, setSavedMovie] = useState([])
-    const [disableBtn, setDisableBtn] = useState(false)
 
     const handleDetails = () => {
         navigate(`details/${movieId}`)
     }
-
-    const handleSaveMovie = () => {
-      if(savedMovie.some(movie => movie.movieId === movieId)) {
-        setSavedMovie([...savedMovie, {savedMovie, title}])
-        setDisableBtn(true)
-        successMsg()
-      }
-    }
-
-    const successMsg = ()=>{
-      toast('Movie Saved Successfully', {
-        position: "top-center",
-        duration: 5000,
-        style: {
-          background: '#00000',
-          color: '#fffff'
-        }
-      })
-    }
    
   return (
     <div data-testid="movie-card" className={classes.movieCard}>
-      <Toaster />
       <img
         src={`https://image.tmdb.org/t/p/w300/${poster}`}
         alt={`${posterTitle} poster`}
@@ -115,7 +95,7 @@ const MovieCard = ({
           <span data-testid="movie-release-date" className={classes.detailsSpan}>{releaseDate}</span>
         </div>
         <div className={classes.buttonHolder}>
-          <button onClick={handleSaveMovie} className={classes.button} disabled={disableBtn}>{disableBtn ? "Movie Saved" : "Saved Movie"}</button>
+          <button onClick={() => handleSaveMovie(movieId)} className={classes.button}>Save Movie</button>
         </div>
       </div>
     </div>

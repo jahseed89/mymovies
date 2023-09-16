@@ -6,7 +6,7 @@ import { calender, des, home, logo, tvshow } from "../../assets/index";
 import {BiArrowBack} from 'react-icons/bi'
 import { createUseStyles } from "react-jss";
 
-const useStyles = createUseStyles({
+const useStyles = createUseStyles((theme) => ({
     details: {
         width: "80%",
         margin: "0 auto",
@@ -99,7 +99,7 @@ const useStyles = createUseStyles({
         }
       },
 
-})
+}))
 
 const MovieDetails = () => {
   const { movieId } = useParams();
