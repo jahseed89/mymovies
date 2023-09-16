@@ -14,7 +14,6 @@ const theme = {
     justifyContent: 'space-between',
   }
 };
-
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
