@@ -4,7 +4,7 @@
     font-family: 'Courier New', Courier, monospace;
 
     .top-bg {
-        background-image: url('../../assets/johnwick.jpeg');
+        background-image: url('../../assets/header.png');
         height: 300px;
         object-fit: cover;
 
@@ -25,11 +25,24 @@
 
             }
         }
+      
         .invalid-movie {
             text-align: center;
             color: red;
         }
     }
+
+    .featured-movie {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .see-more {
+        display: flex;
+        text-align: center;
+        color: #428bca;
+    }
+
     .title {
         margin-top: 3rem;
         color:  #428bca;
@@ -37,8 +50,8 @@
     .movie-wrapper {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
         justify-content: space-between;
+        gap: 1rem;
     }
 
     .loading {

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Loader, MovieCard } from "../../component/index";
 import { footer } from "../../assets/index";
 import { useNavigate } from "react-router-dom";
-import { Toaster, toast } from "react-hot-toast";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import "./home.scss";
 
 const Home = () => {
@@ -14,7 +14,6 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const API_KEY = process.env.REACT_APP_TMDB_KEY;
 
-  const [savedMovie, setSavedMovie] = useState([]);
 
   const baseUrl = "https://api.themoviedb.org/3/movie/top_rated";
   const allMovieUrl = "https://api.themoviedb.org/3/search/movie";
@@ -71,30 +70,8 @@ const Home = () => {
     navigator(`movies/${movie_id}`);
   };
 
-  const handleSaveClick = (movie_id) => {
-    if (!savedMovie.some((movie) => movie.movie_id === movie_id)) {
-      const movieToSave = topMovies.find((movie) => movie.id === movie_id);
-      if (movieToSave) {
-        setSavedMovie([...savedMovie, movieToSave]);
-        successMsg();
-      }
-    }
-  };
-
-  const successMsg = () => {
-    toast("Movie Saved Successfully", {
-      position: "top-center",
-      duration: 5000,
-      style: {
-        background: "#333",
-        color: "#ffffff",
-      },
-    });
-  };
-
   return (
     <div className="home">
-      <Toaster />
       {isLoading ? (
         <div>
           <Loader />
@@ -102,6 +79,10 @@ const Home = () => {
       ) : (
         <div>
           <div className="top-bg">
+            <div>
+            <h3>John wick 3:</h3>
+            <h3>Parabellum</h3>
+            </div>
             <div className="input-fild">
               <input
                 type="text"
@@ -111,7 +92,15 @@ const Home = () => {
               />
             </div>
           </div>
-          <h1 className="title">Top 10 Movies</h1>
+          <div className="featured-movie">
+            <h1 className="title">Featured Movies</h1>
+            <p className="see-more">
+              <span>see more</span>
+              <span>
+                <AiOutlineArrowRight />
+              </span>
+            </p>
+          </div>
           <div className="movie-wrapper">
             {topMovies.map((movie) => (
               <div key={movie.id}>
@@ -123,7 +112,6 @@ const Home = () => {
                   popularity={movie.popularity}
                   title={movie.title}
                   releaseDate={movie.release_date}
-                  handleSaveMovie={() => handleSaveClick(movie.id)}
                 />
               </div>
             ))}
