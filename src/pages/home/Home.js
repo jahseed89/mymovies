@@ -103,7 +103,7 @@ const Home = () => {
           </div>
           <div className="movie-wrapper">
             {topMovies.map((movie) => (
-              <div key={movie.id}>
+              <div key={movie.id} className="movies-container">
                 <MovieCard
                   data-testid="movie-card"
                   movie_id={movie.id}

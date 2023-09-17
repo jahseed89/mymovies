@@ -3,6 +3,10 @@
     margin: 0 auto;
     font-family: 'Courier New', Courier, monospace;
 
+    @media (max-width: 900px) {
+        width: 100%;
+    }
+
     .top-bg {
         background-image: url('../../assets/header.png');
         height: 300px;
@@ -35,6 +39,8 @@
     .featured-movie {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
     }
 
     .see-more {
@@ -44,8 +50,11 @@
     }
 
     .title {
-        margin-top: 3rem;
         color:  #428bca;
+
+        @media (max-width: 900px) {
+            font-size: 16px;
+        }
     }
     .movie-wrapper {
         display: grid;

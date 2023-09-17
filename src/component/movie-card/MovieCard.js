@@ -70,7 +70,15 @@ const useStyles = createUseStyles((theme) => {
       borderRadius: "5px",
       fontSize: "12px",
     },
+
+    "@media (max-width: 900px)": {
+      movieCardImg: {
+        width: "100%",
+        objectFit: 'cover'
+      }
+    },
   };
+  
 });
 
 const MovieCard = ({
