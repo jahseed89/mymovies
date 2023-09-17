@@ -12,6 +12,14 @@
         height: 300px;
         object-fit: cover;
 
+        .header-des {
+                padding-top: 3rem;
+                padding-left: 2rem;
+            h3 {
+                color: #fff;
+            }
+        }
+
         .input-fild {
             width: 40%;
             margin: 0 auto;

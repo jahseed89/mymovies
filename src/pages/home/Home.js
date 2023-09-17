@@ -14,7 +14,6 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const API_KEY = process.env.REACT_APP_TMDB_KEY;
 
-
   const baseUrl = "https://api.themoviedb.org/3/movie/top_rated";
   const allMovieUrl = "https://api.themoviedb.org/3/search/movie";
 
@@ -79,9 +78,9 @@ const Home = () => {
       ) : (
         <div>
           <div className="top-bg">
-            <div>
-            <h3>John wick 3:</h3>
-            <h3>Parabellum</h3>
+            <div className="header-des">
+              <h3>John wick 3:</h3>
+              <h3>Parabellum</h3>
             </div>
             <div className="input-fild">
               <input
